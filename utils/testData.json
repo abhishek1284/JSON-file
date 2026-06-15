@@ -1,0 +1,66 @@
+{
+  "validUser": {
+    "email": "abhianime1018@gmail.com",
+    "password": "Password123!"
+  },
+  "invalidUser": {
+    "email": "wronguser@example.com",
+    "password": "WrongPassword!"
+  },
+  "searchKeywords": [
+    "computer",
+    "laptop",
+    "camera"
+  ],
+  "menus": [
+    {
+      "name": "Computers",
+      "subMenus": ["Desktops", "Notebooks", "Accessories"]
+    },
+    {
+      "name": "Electronics",
+      "subMenus": ["Camera, photo", "Cell phones"]
+    },
+    {
+      "name": "Apparel & Shoes",
+      "subMenus": []
+    },
+    {
+      "name": "Digital downloads",
+      "subMenus": []
+    },
+    {
+      "name": "Books",
+      "subMenus": []
+    },
+    {
+      "name": "Jewelry",
+      "subMenus": []
+    },
+    {
+      "name": "Gift Cards",
+      "subMenus": []
+    }
+  ],
+  "registration": {
+    "firstName": "Abhishek",
+    "lastName": "Pradhan",
+    "password": "Password123!",
+    "duplicateEmail": "abhianime1018@gmail.com"
+  },
+  "poll": {
+    "options": [
+      "Excellent",
+      "Good",
+      "Poor",
+      "Very bad"
+    ]
+  },
+  "addToCart": {
+    "invalidQuantities": [0, -1],
+    "expectedErrorMessage": "Quantity should be positive",
+    "validQuantities": [1, 2],
+    "expectedSuccessMessage": "The product has been added to your shopping cart"
+  }
+}
+
