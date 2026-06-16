@@ -17,14 +17,10 @@ test("Add to cart with different quantities", async ({ page }) => {
   await page.locator(".product-title a").first().click();
 
   console.log("Product page opened");
-
-  // Wait for quantity field
   const qtyInput = page.locator(".qty-input");
   await qtyInput.waitFor({ state: "visible", timeout: 10000 });
 
-  // ==========================
   // CASE 1: Quantity = 0
-  // ==========================
   await qtyInput.clear();
   await qtyInput.fill(
     testData.addToCart.invalidQuantities[0].toString()
@@ -49,7 +45,6 @@ test("Add to cart with different quantities", async ({ page }) => {
       await errorMessage.first().textContent()
     );
 
-    // Full-page screenshot showing validation error
     await page.screenshot({
       path: "screenshots/quantity-error.png",
       fullPage: true,
@@ -59,9 +54,7 @@ test("Add to cart with different quantities", async ({ page }) => {
     console.log("No error message displayed for quantity 0.");
   }
 
-  // ==========================
   // CASE 2: Quantity = 1
-  // ==========================
   await qtyInput.clear();
   await qtyInput.fill(
     testData.addToCart.validQuantities[0].toString()
@@ -82,10 +75,8 @@ test("Add to cart with different quantities", async ({ page }) => {
     await successNotification.textContent()
   );
 
-  // Wait briefly so notification is clearly visible
   await page.waitForTimeout(1500);
 
-  // Full-page screenshot with success notification visible
   await page.screenshot({
     path: "screenshots/add-to-cart-success.png",
     fullPage: true,
