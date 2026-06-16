@@ -15,6 +15,9 @@ test.describe("Login Scenarios", () => {
     await page.locator('//*[@id="Password"]').fill(testData.validUser.password);
     await page.locator('input[value="Log in"]').click();
 
+    // Screenshot after login success
+    await page.screenshot({ path: "screenshots/login-success.png", fullPage: true });
+
     await expect(page.locator('//a[text()="Log out"]')).toBeVisible();
   });
 
@@ -30,6 +33,9 @@ test.describe("Login Scenarios", () => {
     await page.locator('//*[@id="Email"]').fill(testData.invalidUser.email);
     await page.locator('//*[@id="Password"]').fill(testData.invalidUser.password);
     await page.locator('input[value="Log in"]').click();
+
+    // Screenshot after invalid login attempt
+    await page.screenshot({ path: "screenshots/login-invalid.png", fullPage: true });
 
     const errorMessage = page.locator('.message-error, .validation-summary-errors li').first();
     await expect(errorMessage).toBeVisible();
