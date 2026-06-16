@@ -27,6 +27,9 @@ test.describe("Registration Scenarios", () => {
     await expect(page.locator(".result")).toHaveText("Your registration completed");
     await expect(page.locator("a.ico-logout")).toBeVisible();
 
+    // 📸 Screenshot after successful registration
+    await page.screenshot({ path: "screenshots/registration-success.png", fullPage: true });
+
     await page.waitForTimeout(5000);
   });
 
@@ -53,6 +56,9 @@ test.describe("Registration Scenarios", () => {
     const errorMessage = page.locator(".validation-summary-errors li");
     await expect(errorMessage).toBeVisible();
     await expect(errorMessage).toContainText("The specified email already exists");
+
+    // 📸 Screenshot after duplicate email error
+    await page.screenshot({ path: "screenshots/registration-error.png", fullPage: true });
 
     await page.waitForTimeout(5000);
   });
