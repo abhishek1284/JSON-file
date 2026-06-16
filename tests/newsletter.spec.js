@@ -4,21 +4,20 @@ import testData from "../utils/testData.json";
 test.describe("Newsletter Subscription", () => {
   test("Valid email subscription", async ({ page }) => {
     await page.goto("https://demowebshop.tricentis.com/");
+    await page.fill("#newsletter-email", testData.newsletter.validEmail);
+    await page.click("#newsletter-subscribe-button");
+
     try {
-      await page.fill("#newsletter-email", testData.newsletter.validEmail);
-      await page.click("#newsletter-subscribe-button");
+      const successLocator = page.locator(".newsletter-result-block, .newsletter-result");
+      await successLocator.waitFor({ state: "visible", timeout: 5000 });
 
-      const resultLocator = page.locator(".newsletter-result");
-      await resultLocator.waitFor({ state: "visible", timeout: 10000 });
-
-      const result = await resultLocator.innerText();
-      expect.soft(result).toContain("Thank you for signing up!");
-      console.log("✅ Valid email subscription handled successfully");
-
-      // Screenshot after success
+      // Screenshot after success message appears
       await page.screenshot({ path: "screenshots/valid-subscription.png", fullPage: true });
+
+      const result = await successLocator.innerText();
+      expect.soft(result).toContain("Thank you for signing up!");
     } catch (error) {
-      console.log("⚠️ Error in valid subscription test:", error.message);
+      console.log(" Valid subscription message not found:", error.message);
       await page.screenshot({ path: "screenshots/valid-subscription-error.png", fullPage: true });
       expect.soft(false, `Handled error: ${error.message}`);
     }
@@ -26,23 +25,25 @@ test.describe("Newsletter Subscription", () => {
 
   test("Invalid email subscription", async ({ page }) => {
     await page.goto("https://demowebshop.tricentis.com/");
+    await page.fill("#newsletter-email", testData.newsletter.invalidEmail);
+    await page.click("#newsletter-subscribe-button");
+
     try {
-      await page.fill("#newsletter-email", testData.newsletter.invalidEmail);
-      await page.click("#newsletter-subscribe-button");
+      // Correct locator for invalid email error
+      const errorLocator = page.locator(".field-validation-error");
+      await errorLocator.waitFor({ state: "visible", timeout: 5000 });
 
-      const resultLocator = page.locator(".newsletter-result");
-      await resultLocator.waitFor({ state: "visible", timeout: 10000 });
-
-      const result = await resultLocator.innerText();
-      expect.soft(result).toContain("Enter valid email");
-      console.log("✅ Invalid email subscription handled successfully");
-
-      // Screenshot after success
+      // Screenshot after error message appears
       await page.screenshot({ path: "screenshots/invalid-subscription.png", fullPage: true });
+
+      const result = await errorLocator.innerText();
+      expect.soft(result).toContain("Enter valid email");
     } catch (error) {
-      console.log("⚠️ Error in invalid subscription test:", error.message);
+      console.log("Invalid subscription message not found:", error.message);
       await page.screenshot({ path: "screenshots/invalid-subscription-error.png", fullPage: true });
       expect.soft(false, `Handled error: ${error.message}`);
     }
   });
 });
+
+
