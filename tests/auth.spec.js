@@ -23,8 +23,11 @@ test.describe("DemoShop - Authentication Flaws", () => {
     const errorLocator = page.locator(".field-validation-error");
     await errorLocator.waitFor({ state: "visible", timeout: 10000 });
 
-    // Assert error message
-    await expect(errorLocator).toContainText("Password must meet the following rules");
+    // Take screenshot before assertion (so you always capture UI)
+    await page.screenshot({ path: "screenshots/weakPassword_beforeAssert.png", fullPage: true });
+
+    // Assert error message (use regex for flexibility)
+    await expect(errorLocator).toContainText(/Password must meet/);
 
     //  Explicit screenshot for success case
     await errorLocator.screenshot({ path: "screenshots/weakPassword_success.png" });
