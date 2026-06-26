@@ -7,11 +7,15 @@
     "email": "wronguser@example.com",
     "password": "WrongPassword!"
   },
-  "searchKeywords": [
-    "computer",
-    "laptop",
-    "camera"
-  ],
+  "weakPasswordUser": {
+    "email": "weakpass.demo@example.com",
+    "password": "123"
+  },
+  "sessionUser": {
+    "email": "session.demo@example.com",
+    "password": "StrongPass123!"
+  },
+  "searchKeywords": ["computer", "laptop", "camera"],
   "menus": [
     {
       "name": "Computers",
@@ -49,18 +53,58 @@
     "duplicateEmail": "abhianime1018@gmail.com"
   },
   "poll": {
-    "options": [
-      "Excellent",
-      "Good",
-      "Poor",
-      "Very bad"
-    ]
+    "options": ["Excellent", "Good", "Poor", "Very bad"]
   },
   "addToCart": {
     "invalidQuantities": [0, -1],
     "expectedErrorMessage": "Quantity should be positive",
     "validQuantities": [1, 2],
     "expectedSuccessMessage": "The product has been added to your shopping cart"
+  },
+  "checkout": {
+    "billingAddress": {
+      "firstName": "Abhishek",
+      "lastName": "Pradhan",
+      "address": "123 Test Street",
+      "city": "Kathmandu",
+      "zip": "44600",
+      "country": "Nepal",
+      "phone": "9800000000"
+    },
+    "shippingMethod": ["Ground", "Next Day Air", "2nd Day Air"],
+    "paymentMethod": ["Credit Card", "Cash on Delivery", "Check / Money Order"],
+    "invalidCard": {
+      "cardNumber": "1234567890123456",
+      "expiry": "01/20",
+      "cvv": "000"
+    }
+  },
+  "wishlist": {
+    "products": ["Build your own computer", "Laptop", "Camera"]
+  },
+  "compareProducts": {
+    "products": ["Laptop", "Camera"],
+    "expectedPageTitle": "Compare products"
+  },
+  "newsletter": {
+    "validEmail": "subscriber@example.com",
+    "invalidEmail": "bademail"
+  },
+  "expectedUrls": {
+    "Computers": "/computers",
+    "Desktops": "/desktops",
+    "Notebooks": "/notebooks",
+    "Accessories": "/accessories",
+    "Electronics": "/electronics",
+    "Camera, photo": "/camera-photo",
+    "Cell phones": "/cell-phones",
+    "Books": "/books",
+    "Jewelry": "/jewelry",
+    "Gift Cards": "/gift-cards"
+  },
+  "shareProduct": {
+    "friendEmail": "friend.demo@example.com",
+    "yourEmail": "abhishek.qa.demo@example.com",
+    "message": "Hey, check out this product from DemoShop!"
   }
 }
-

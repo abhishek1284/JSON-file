@@ -38,3 +38,4 @@ test("Validate Demo Web Shop menu navigation with hover using JSON", async ({ pa
 
   await page.waitForTimeout(5000);
 });
+

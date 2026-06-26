@@ -84,3 +84,4 @@ test("Add to cart with different quantities", async ({ page }) => {
 
   console.log("Success screenshot captured.");
 });
+
