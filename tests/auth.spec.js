@@ -26,11 +26,10 @@ test.describe("DemoShop - Authentication Flaws", () => {
     // Screenshot before assertion
     await page.screenshot({ path: "screenshots/weakPassword_beforeAssert.png", fullPage: true });
 
-    // ✅ Option 1: Match exact text
+    //  Match exact text
     await expect(errorLocator).toContainText("The password should have at least 6 characters.");
 
-    // ✅ Option 2: Use regex for flexibility
-    // await expect(errorLocator).toContainText(/at least 6 characters/);
+  
 
     // Screenshot for success case
     await errorLocator.screenshot({ path: "screenshots/weakPassword_success.png" });
