@@ -23,13 +23,16 @@ test.describe("DemoShop - Authentication Flaws", () => {
     const errorLocator = page.locator(".field-validation-error");
     await errorLocator.waitFor({ state: "visible", timeout: 10000 });
 
-    // Take screenshot before assertion (so you always capture UI)
+    // Screenshot before assertion
     await page.screenshot({ path: "screenshots/weakPassword_beforeAssert.png", fullPage: true });
 
-    // Assert error message (use regex for flexibility)
-    await expect(errorLocator).toContainText(/Password must meet/);
+    // ✅ Option 1: Match exact text
+    await expect(errorLocator).toContainText("The password should have at least 6 characters.");
 
-    //  Explicit screenshot for success case
+    // ✅ Option 2: Use regex for flexibility
+    // await expect(errorLocator).toContainText(/at least 6 characters/);
+
+    // Screenshot for success case
     await errorLocator.screenshot({ path: "screenshots/weakPassword_success.png" });
 
     // Keep page visible for observation
@@ -63,7 +66,7 @@ test.describe("DemoShop - Authentication Flaws", () => {
     await expect(page1.locator("a.ico-logout")).toBeVisible();
     await expect(page2.locator("a.ico-logout")).toBeVisible();
 
-    //  Explicit screenshot for success case
+    // Screenshot for success case
     await page2.screenshot({ path: "screenshots/session_success.png", fullPage: true });
 
     // Keep browser open for observation
@@ -74,3 +77,4 @@ test.describe("DemoShop - Authentication Flaws", () => {
   });
 
 });
+
