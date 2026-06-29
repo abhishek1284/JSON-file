@@ -23,23 +23,21 @@ test.describe("DemoShop - Authentication Flaws", () => {
     const errorLocator = page.locator(".field-validation-error");
     await errorLocator.waitFor({ state: "visible", timeout: 10000 });
 
-    // Screenshot before assertion
+   
     await page.screenshot({ path: "screenshots/weakPassword_beforeAssert.png", fullPage: true });
 
-    //  Match exact text
     await expect(errorLocator).toContainText("The password should have at least 6 characters.");
 
   
 
-    // Screenshot for success case
     await errorLocator.screenshot({ path: "screenshots/weakPassword_success.png" });
 
-    // Keep page visible for observation
+  
     await page.waitForTimeout(7000);
   });
 
   test("Session handling - multiple logins", async ({ browser }) => {
-    // First Session
+  
     const context1 = await browser.newContext();
     const page1 = await context1.newPage();
 
@@ -50,7 +48,6 @@ test.describe("DemoShop - Authentication Flaws", () => {
 
     await expect(page1.locator("a.ico-logout")).toBeVisible();
 
-    // Second Session
     const context2 = await browser.newContext();
     const page2 = await context2.newPage();
 
@@ -61,14 +58,14 @@ test.describe("DemoShop - Authentication Flaws", () => {
 
     await expect(page2.locator("a.ico-logout")).toBeVisible();
 
-    // Verify both sessions remain active
+
     await expect(page1.locator("a.ico-logout")).toBeVisible();
     await expect(page2.locator("a.ico-logout")).toBeVisible();
 
-    // Screenshot for success case
+  
     await page2.screenshot({ path: "screenshots/session_success.png", fullPage: true });
 
-    // Keep browser open for observation
+  
     await page2.waitForTimeout(7000);
 
     await context1.close();

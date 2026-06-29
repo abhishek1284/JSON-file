@@ -23,10 +23,9 @@ test("Validate Demo Web Shop menu navigation with hover using JSON", async ({ pa
       const subMenuName = await subMenus.nth(j).textContent();
       console.log(`   Sub Menu: ${subMenuName?.trim()}`);
 
-      // Assertion: submenu name should not be empty
       expect(subMenuName?.trim()).not.toBe("");
 
-      // Optional: check against JSON data if available
+  
       const expectedSubMenus = testData.menus.find(m => m.name === menuName?.trim())?.subMenus || [];
       if (expectedSubMenus.length > 0) {
         expect(expectedSubMenus).toContain(subMenuName?.trim());

@@ -2,25 +2,22 @@ import { test, expect } from "@playwright/test";
 import testData from "../utils/testData.json";
 
 test("Add to cart with different quantities", async ({ page }) => {
-  // Open website
+
   await page.goto("https://demowebshop.tricentis.com/");
 
   console.log("Website opened");
 
-  // Search product
   await page.fill("#small-searchterms", testData.searchKeywords[0]);
   await page.click('input[value="Search"]');
 
   console.log("Search completed");
 
-  // Open first search result
   await page.locator(".product-title a").first().click();
 
   console.log("Product page opened");
   const qtyInput = page.locator(".qty-input");
   await qtyInput.waitFor({ state: "visible", timeout: 10000 });
 
-  // CASE 1: Quantity = 0
   await qtyInput.clear();
   await qtyInput.fill(
     testData.addToCart.invalidQuantities[0].toString()
@@ -54,7 +51,7 @@ test("Add to cart with different quantities", async ({ page }) => {
     console.log("No error message displayed for quantity 0.");
   }
 
-  // CASE 2: Quantity = 1
+
   await qtyInput.clear();
   await qtyInput.fill(
     testData.addToCart.validQuantities[0].toString()

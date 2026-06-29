@@ -15,7 +15,7 @@ test.describe("Login Scenarios", () => {
     await page.locator('//*[@id="Password"]').fill(testData.validUser.password);
     await page.locator('input[value="Log in"]').click();
 
-    // Screenshot after login success
+
     await page.screenshot({ path: "screenshots/login-success.png", fullPage: true });
 
     await expect(page.locator('//a[text()="Log out"]')).toBeVisible();
